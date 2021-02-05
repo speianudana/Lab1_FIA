@@ -1,0 +1,84 @@
+# 5 tourist types and the criteria by which they can be distinguished from Loonies
+# and between themselves (i.e. clothes, accent, gait, height and opinion on politics)
+# Clothes, Accent, SkinColor, NumberOfFingers, NumberOfLegs
+# Quasarians - ClothesColor - Blue , Accent - Funny, SkinColor - Green, NumberOfFingersOnAHand - 3, NumberOfLegs - 10
+# Earthians - ClothesColor - Green, Accent - Mumbled, SkinColor - Purple, NumberOfFingersOnAHand - 5, NumberOfLegs - 2
+# Marsians - ClothesColor - Red, Accent - Russian, SkinColor - Black, NumberOfFingersOnAHand - 10, NumberOfLegs - 5
+# Orionians - ClothesColor - White, Accent - Moldavian, SkinColor - Blue, NumberOfFingersOnAHand - 2, NumberOfLegs - 4
+# Siriusians - ClothesColor - Yellow, Accent - Deutsch, SkinColor - Brown, NumberOfFingersOnAHand - 4, NumberOfLegs - 3
+# Loonies- ClothesColor - Grey, Accent - Loonian, SkinColor - Black, NumberOfFingersOnAHand - 6, NumberOfLegs - 8
+
+from production import IF, AND, OR, NOT, THEN, forward_chain
+
+rule1 = IF(AND('(?y) has blue clothes',  # rule 1
+               '(?y) has funny accent',
+               '(?y) has green skin color',
+               '(?y) has 3 fingers on a hand',
+               '(?y) has 10 legs'),
+           THEN('(?y) is a Quasarian'))
+
+facts = ["Tom has blue clothes", "Tom has funny accent", "Tom has green skin color",  "Tom has 3 fingers on a hand", "Tom has 10 legs"]
+
+print(forward_chain([rule1], facts))
+
+rule2 = IF(AND('(?y) has green clothes',  # rule 2
+               '(?y) has mumbled accent',
+               '(?y) has purple skin color',
+               '(?y) has 5 fingers on a hand',
+               '(?y) has 2 legs'),
+           THEN('(?y) is a Earthian'))
+
+facts = ["Tom has green clothes", "Tom has mumbled accent", "Tom has purple skin color",  "Tom has 5 fingers on a hand", "Tom has 2 legs"]
+
+
+print(forward_chain([rule2], facts))
+
+rule3 = IF(AND('(?y) has red clothes',  # rule 3
+               '(?y) has russian accent',
+               '(?y) has black skin color',
+               '(?y) has 10 fingers on a hand',
+               '(?y) has 5 legs'),
+           THEN('(?y) is a Marsian'))
+
+facts = ["Tom has red clothes", "Tom has russian accent", "Tom has black skin color",  "Tom has 10 fingers on a hand", "Tom has 5 legs"]
+
+
+print(forward_chain([rule3], facts))
+
+
+rule4 = IF(AND('(?y) has white clothes',  # rule 3
+               '(?y) has moldavian accent',
+               '(?y) has blue skin color',
+               '(?y) has 2 fingers on a hand',
+               '(?y) has 4 legs'),
+           THEN('(?y) is a Orionian'))
+
+facts = ["Tom has white clothes", "Tom has moldavian accent", "Tom has blue skin color", "Tom has 2 fingers on a hand", "Tom has 4 legs"]
+
+
+print(forward_chain([rule4], facts))
+
+rule5 = IF(AND('(?y) has yellow clothes',  # rule 5
+               '(?y) has deutsch accent',
+               '(?y) has brown skin color',
+               '(?y) has 4 fingers on a hand',
+               '(?y) has 3 legs'),
+           THEN('(?y) is a Siriusian'))
+
+facts = ["Tom has yellow clothes", "Tom has deutsch accent", "Tom has brown skin color", "Tom has 4 fingers on a hand", "Tom has 3 legs"]
+
+
+print(forward_chain([rule5], facts))
+
+# Loonies- ClothesColor - Grey, Accent - Loonian, SkinColor - Black, NumberOfFingersOnAHand - 6, NumberOfLegs - 8
+rule6 = IF(AND('(?y) has grey clothes',  # rule 6
+               '(?y) has loonian accent',
+               '(?y) has black skin color',
+               '(?y) has 6 fingers on a hand',
+               '(?y) has 8 legs'),
+           THEN('(?y) is a Loonie'))
+
+facts = ["Tom has grey clothes", "Tom has loonian accent", "Tom has black skin color",  "Tom has 6 fingers on a hand", "Tom has 8 legs"]
+
+
+print(forward_chain([rule6], facts))
