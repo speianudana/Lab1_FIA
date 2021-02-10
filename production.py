@@ -1,4 +1,3 @@
-import re
 from utils import *
 
 try:
@@ -14,13 +13,6 @@ except NameError:
         new_lst.sort()
         return new_lst
 
-
-### We've tried to keep the functions you will need for
-### back-chaining at the top of this file. Keep in mind that you
-### can get at this documentation from a Python prompt:
-###
-### >>> import production
-### >>> help(production)
 
 def forward_chain(rules, data, apply_only_one=False, verbose=False):
     """
@@ -229,7 +221,7 @@ class RuleExpression(list):
         it against the rules.
         """
         rules = set(rules)
-        if context_so_far == None: context_so_far = {}
+        if context_so_far is None: context_so_far = {}
 
         # Deal with nesting first If we're a nested term, we
         # already have a test function; use it

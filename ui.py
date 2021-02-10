@@ -1,44 +1,50 @@
-from production import IF, AND, OR, NOT, THEN, forward_chain
+from backchain import backchain_to_goal_tree
+from production import forward_chain
 import rules
+
+possible_results = ["Marsian", "Siriusian", "Quasarian", "Earthian", "Loonie", "Orionian"]
+
+
+def yes(ques):
+    ans = raw_input(ques).lower()
+    return ans[0] == 'y'
+
+
+answers = []
+
+
+def ask_questions(tree, name):
+    if tree is None:
+        return
+    result = yes('Does ' + tree.cargo.format(name) + '? y/n ')
+    if result:
+        answers.append(tree.cargo.format(name).encode('utf8'))
+        ask_questions(tree.left, name)
+    else:
+        ask_questions(tree.right, name)
+
 
 run_client = True
 
-given_rules = []
 while run_client:
-    TEST_RESULTS_1 = ""
-    print("Give being's name?")
-    name = raw_input("Name: ")
+    answers = []
+    print('Give name')
+    name = raw_input('Name: ')
+    type_of_chain = raw_input('Forward or Backward chain?(F/B):')
+    if type_of_chain == "F":
+        ask_questions(rules.tree, name)
+        result = forward_chain(rules.RULES, answers)
+        nationality = result[-1].split()[-1]
+        if nationality in possible_results:
+            print(result[-1])
+        else:
+            print "Unknown"
 
-    print("Has the being more than 50 kg?")
-    message = raw_input("Yes/No: ")
-    if message == "Yes":
-        given_rules.append(name + " has more than 50 kg")
     else:
-        given_rules.append(name + " has less than 50 kg")
+        nationality = raw_input('Enter nationality:')
+        print backchain_to_goal_tree(rules.RULES, name + ' is a ' + nationality)
 
-    print("Has the being more than 30 years?")
-    message = raw_input("Yes/No: ")
-    if message == 'Yes':
-        given_rules.append(name + " has more than 30 years")
-    else:
-        given_rules.append(name + " has less than 30 years")
 
-    print("Has white skin color?")
-    message = raw_input("Yes/No: ")
-    if message == 'Yes':
-        given_rules.append(name + " has white skin color")
-
-    print("How many fingers does " + name + " have?")
-    message = raw_input("Number of fingers on a hand: ")
-    print (int(message))
-    if int(message) > 5:
-        given_rules.append(name + " has more than 5 fingers")
-
-    print("How many legs does " + name + " have?")
-    message = raw_input("Number of legs: ")
-    if int(message) > 4:
-        given_rules.append(name + " has more than 4 legs")
-
-    TEST_RESULTS_1 = forward_chain([rules.rule1, rules.rule4, rules.rule2], given_rules)
-    print TEST_RESULTS_1[-1]
-
+HOW_MANY_HOURS_THIS_PSET_TOOK = ''
+WHAT_I_FOUND_INTERESTING = ''
+WHAT_I_FOUND_BORING = ''
