@@ -1,5 +1,4 @@
-from production import AND, OR, NOT, PASS, FAIL, IF, THEN, \
-    match, populate, simplify, variables
+from production import AND, OR, match, populate, simplify
 
 
 def backchain_to_goal_tree(rules, hypothesis):

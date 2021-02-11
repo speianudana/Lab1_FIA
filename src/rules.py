@@ -1,4 +1,4 @@
-from production import IF, AND, OR, NOT, THEN
+from production import IF, AND, THEN
 
 RULES = (
 

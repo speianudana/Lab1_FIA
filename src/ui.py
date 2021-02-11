@@ -16,7 +16,7 @@ answers = []
 def ask_questions(tree, name):
     if tree is None:
         return
-    result = yes('Does ' + tree.cargo.format(name) + '? y/n ')
+    result = yes(tree.cargo.format(name) + '? y/n ')
     if result:
         answers.append(tree.cargo.format(name).encode('utf8'))
         ask_questions(tree.left, name)
@@ -34,12 +34,14 @@ while run_client:
     if type_of_chain == "F":
         ask_questions(rules.tree, name)
         result = forward_chain(rules.RULES, answers)
-        nationality = result[-1].split()[-1]
-        if nationality in possible_results:
-            print(result[-1])
+        if len(result) != 0:
+            nationality = result[-1].split()[-1]
+            if nationality in possible_results:
+                print(result[-1])
+            else:
+                print "Unknown"
         else:
             print "Unknown"
-
     else:
         nationality = raw_input('Enter nationality:')
         print backchain_to_goal_tree(rules.RULES, name + ' is a ' + nationality)
