@@ -1,4 +1,9 @@
 # Expert System
+## Table of contents
+* [Introduction](#general-info)
+* [Technologies](#technologies)
+* [Sources](#sources)
+* [Launch](#launch)
 
 ## Introduction - the project's aim
 
@@ -9,6 +14,19 @@ and between themselves. If the set of given answers matches a type of tourist fr
 should be the system’s answer. If on the other hand, the system determines that the person
 in question is a Loonie, the answer should be returned accordingly.
 
-## Technologies, sources
+## Technologies
+* Python 2.7
+* Docker
+
+## Sources
+    https://github.com/joeloskarsson/MIT6.034/tree/master/lab1
 
 ## Launch
+### Build the image:
+```
+docker build -t lab1_expert_system .
+```
+### Run the image:
+```
+docker run -it lab1_expert_system
+```
